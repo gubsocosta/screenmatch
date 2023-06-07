@@ -10,6 +10,6 @@ public class RunningTimeCalculator {
     }
 
     public void addTitle(Movie movie) {
-        totalRunningTime += movie.getRunningTimeInMinutes();
+        totalRunningTime += movie.getRuntimeInMinutes();
     }
 }

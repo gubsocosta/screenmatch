@@ -13,7 +13,7 @@ public class Serie extends Title implements Recommendable {
     }
 
     @Override
-    public int getRunningTimeInMinutes() {
+    public int getRuntimeInMinutes() {
         return seasonTotal * episodesPerSeason * episodesPerSeason;
     }
 

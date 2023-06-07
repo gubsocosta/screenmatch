@@ -1,16 +1,29 @@
 package tech.gubs.screenmatch.entities;
 
+import com.google.gson.annotations.SerializedName;
+import tech.gubs.screenmatch.entities.omdb.TitleOmdb;
+
 public class Title implements Comparable<Title> {
     private boolean includedInThePlan;
+    @SerializedName("Title")
     private String name;
+    @SerializedName("Year")
     private int releaseYear;
-    private int runningTimeInMinutes;
+    private int runtimeInMinutes;
     private double totalRating;
     private int totalReviews;
 
     public Title(String name, int releaseYear) {
         this.name = name;
         this.releaseYear = releaseYear;
+    }
+
+    public Title(TitleOmdb titleOmdb) {
+        this.name = titleOmdb.title();
+        String titleOmdbYear = titleOmdb.year();
+        String titleOmdbRuntime = titleOmdb.runtime();
+        this.releaseYear = Integer.valueOf(titleOmdbYear.substring(0, 4));
+        this.runtimeInMinutes = Integer.valueOf(titleOmdbRuntime.substring(titleOmdbRuntime.length(), 4));
     }
 
     public boolean isIncludedInThePlan() {
@@ -37,12 +50,12 @@ public class Title implements Comparable<Title> {
         this.releaseYear = releaseYear;
     }
 
-    public int getRunningTimeInMinutes() {
-        return runningTimeInMinutes;
+    public int getRuntimeInMinutes() {
+        return runtimeInMinutes;
     }
 
-    public void setRunningTimeInMinutes(int runningTimeInMinutes) {
-        this.runningTimeInMinutes = runningTimeInMinutes;
+    public void setRuntimeInMinutes(int runtimeInMinutes) {
+        this.runtimeInMinutes = runtimeInMinutes;
     }
 
     public double getTotalRating() {
@@ -68,5 +81,13 @@ public class Title implements Comparable<Title> {
     @Override
     public int compareTo(Title otherTitle) {
         return this.getName().compareTo(otherTitle.getName());
+    }
+
+    @Override
+    public String toString() {
+        return "Title{" +
+                "name='" + name + '\'' +
+                ", releaseYear=" + releaseYear +
+                '}';
     }
 }
